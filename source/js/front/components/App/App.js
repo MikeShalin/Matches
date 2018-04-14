@@ -9,10 +9,8 @@ class App extends Component {
         return (
             <Switch>
                 <Route path="/" exact component={MatchesList} />
-                <Route path="/team" component={Team} />
-                    <Route path="/team/:id" component={Team}>
-                </Route>
-                <Redirect to="/" />
+                <Route path="/team/:id" component={Team}/>
+                <Redirect from="*" to="/"/>
             </Switch>
 
         )

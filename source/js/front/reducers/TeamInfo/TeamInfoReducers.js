@@ -13,5 +13,5 @@ export const isGettingTeamInfo = handleActions(
         [failureTeamInfo]:() => false,
         [successTeamInfo]:() => false,
     },
-    false
+    true
 );

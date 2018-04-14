@@ -8,10 +8,9 @@ const TeamInfoMiddleware = store => next => action => {
         socket.emit('getTeamInfo',action.payload);
         socket.on("teamInfo",(res) => {
             if(res){
-                console.log('получил с бэка ', res);
-                // store.dispatch(successTeamInfo(res))
+                store.dispatch(successTeamInfo(res))
             } else {
-                // store.dispatch(failureTeamInfo(res))
+                store.dispatch(failureTeamInfo(res))
             }
         });
     }

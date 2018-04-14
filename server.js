@@ -20,8 +20,17 @@ io.on("connection",socket => {
         });
     });
     socket.on('getTeamInfo',(teamId) => {
-        sql.query(sql.selectTeamInfo(teamId),(teamInfo)=> {
-            socket.emit("teamInfo",teamInfo);
+        const teamInfo = {};
+        sql.query(sql.selectTeamInfo(teamId),(teamScore)=> {
+            teamInfo.teamScore = teamScore[0];
+            sql.query(sql.selectTeamCloseInScore(teamScore[0].score - 2,teamScore[0].score + 2),(closeInScore)=>{
+                teamInfo.closeInScore = closeInScore;
+                sql.query(sql.selectMaxScore(),(max)=>{
+                    teamInfo.maxScore = max[0];
+                    socket.emit("teamInfo",teamInfo);
+                });
+            });
+
         });
     });
 //
