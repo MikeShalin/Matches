@@ -5,6 +5,7 @@ import rootReducer from 'js/front/reducers/index';
 import MatchesListMiddleware from 'js/front/middlewares/MatchesListMiddleware';
 import TeamsMiddleware from 'js/front/middlewares/TeamsMiddleware';
 import TeamInfoMiddleware from 'js/front/middlewares/TeamInfoMiddleware';
+import SetIsFavoriteMiddleware from 'js/front/middlewares/SetIsFavoriteMiddleware';
 import {createStore, applyMiddleware, compose} from 'redux';
 
 export default initialState => {
@@ -15,7 +16,8 @@ export default initialState => {
             applyMiddleware(
                 MatchesListMiddleware,
                 TeamsMiddleware,
-                TeamInfoMiddleware
+                TeamInfoMiddleware,
+                SetIsFavoriteMiddleware
             ),
             window.devToolsExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
         )

@@ -7,6 +7,7 @@ export const {
     requestTeamInfo:requestTeamInfo,
     failureTeamInfo:failureTeamInfo,
     successTeamInfo:successTeamInfo,
+    setIsFavorite:setIsFavorite
 } = createActions({
 
     REQUEST_TEAMS: undefined,
@@ -20,4 +21,6 @@ export const {
     FAILURE_TEAM_INFO: undefined,
 
     SUCCESS_TEAM_INFO: info => info,
+
+    SET_IS_FAVORITE: id => id
 });
