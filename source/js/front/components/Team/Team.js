@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {requestTeamInfo,setIsFavorite} from 'js/front/actions/TeamsActions/TeamsActions';
 import {PopUp} from 'js/front/components/PopUp/PopUp';
-import {Switch,Route,Link,Redirect,withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export class Team extends Component {
     constructor(props){
@@ -41,6 +41,7 @@ export class Team extends Component {
             <div>
                 {isGettingTeamInfo ? <PopUp>Подождите идет загрузка...</PopUp> :
                     <div>
+                        <Link to = '/' component = 'MatchesList'>Домой</Link>
                         <h2>{teamsTitle.get(Number(id))}</h2>
                         <div><strong>Информацию об играх за текущий период</strong>
                             <ul>
@@ -98,5 +99,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Team));
+export default connect(mapStateToProps,mapDispatchToProps)(Team);
 

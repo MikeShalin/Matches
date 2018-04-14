@@ -4,7 +4,7 @@ import {requestMatches} from 'js/front/actions/MatchesListActions/MatchesListAct
 import {requestTeams} from 'js/front/actions/TeamsActions/TeamsActions';
 import {PopUp} from 'js/front/components/PopUp/PopUp';
 import Team from 'js/front/components/Team/';
-import {Switch,Route,Link,Redirect,withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export class MatchesList extends Component {
     componentDidMount(){
@@ -16,7 +16,7 @@ export class MatchesList extends Component {
         const {MatchesList,isGettingMatches,Teams} = this.props,
             teamsTitle = new Map(Teams.map(el => [el.id,el.title])),
             teamsIsFavorite = new Map(Teams.map(el => [el.id,el.isFavorite]));
-        //
+
         return (
             <div>
                 {isGettingMatches?<PopUp>Подождите идет загрузка...</PopUp>:<ul>
@@ -58,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MatchesList));
+export default connect(mapStateToProps,mapDispatchToProps)(MatchesList);

@@ -9,9 +9,9 @@ class App extends Component {
             <Switch>
                 <Route path='/' exact component={MatchesList} />
                 <Route path='/team/:id' component={Team}/>
+                <Redirect from="team/" to="/" />
                 <Redirect from='*' to='/'/>
             </Switch>
-
         )
     }
 }
