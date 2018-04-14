@@ -5,14 +5,12 @@ const MatchesListMiddleware = store => next => action => {
     if (
         action.type === requestMatches.toString()
     ) {
-        //1 - это id турнира
         socket.emit('getMatchesList');
-        socket.emit('getTeams');
         socket.on("matchesList",(res) => {
             if(res){
-                store.dispatch(successMatches(res))
+                store.dispatch(successMatches(res));
             } else {
-                store.dispatch(failureMatches(res))
+                store.dispatch(failureMatches(res));
             }
         });
     }

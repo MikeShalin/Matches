@@ -1,29 +1,31 @@
-/**
- * Created by mike on 12.03.18.
- */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {requestMatches} from 'js/front/actions/MatchesListActions/MatchesListActions';
+import {requestTeams} from 'js/front/actions/TeamsActions/TeamsActions';
 import {PopUp} from 'js/front/components/PopUp/PopUp';
+import Team from 'js/front/components/Team/';
 import {Switch,Route,Link,Redirect,withRouter} from 'react-router-dom';
 
 export class MatchesList extends Component {
     componentDidMount(){
-        const {requestMatches} = this.props;
+        const {requestMatches,requestTeams} = this.props;
+        requestTeams();
         requestMatches();
     }
     render() {
-        const {MatchesList,isGetting} = this.props;
+        const {MatchesList,isGettingMatches,Teams} = this.props,
+            teamsTitle=new Map(Teams.map(el=>[el.id,el.title])),
+            teamsIsFavorite=new Map(Teams.map(el=>[el.id,el.isFavorite]));
+        //
         return (
             <div>
-                {isGetting?<PopUp>Подождите идет загрузка...</PopUp>:<ul>
+                {isGettingMatches?<PopUp>Подождите идет загрузка...</PopUp>:<ul>
                     {MatchesList.map(match =>(
                         <li key={match.matchId}>
-                            {console.log(match.teams.split(','))}
                             <strong>Матч {match.matchId}</strong> команды: {match.teams.split(',').map(team=>(
-                            <div>
-                                <Link to={`/team/${team}`} component="ShowPage">
-                                    <em>{team}</em>
+                            <div className={teamsIsFavorite.get(Number(team))?'checked':''}>
+                                <Link to={`/team/${team}`} component={Team}>
+                                    <em>{teamsTitle.get(Number(team))}</em>
                                 </Link>
                             </div>
                         ))}
@@ -37,18 +39,23 @@ export class MatchesList extends Component {
 
 const mapStateToProps = (state) =>{
     return{
-        MatchesList:state.MatchesList,
-        isGetting:state.isGetting
+        MatchesList: state.MatchesList,
+        isGettingMatches: state.isGettingMatches,
+        isGettingTeams: state.isGettingTeams,
+        Teams: state.Teams
     }
 };
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        requestMatches: () => {
+        requestMatches: () =>{
             dispatch(requestMatches());
+        },
+        requestTeams: () =>{
+            dispatch(requestTeams());
         }
     }
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(MatchesList);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MatchesList));

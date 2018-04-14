@@ -1,6 +1,3 @@
-/**
- * Created by mike on 12.03.18.
- */
 const sql = require("./source/js/back/sql.js"),
       express = require("express"),
       app = express(),
@@ -17,6 +14,17 @@ io.on("connection",socket => {
             socket.emit("matchesList",matches);
         });
     });
+    socket.on('getTeams',() => {
+        sql.query(sql.selectTeams(),(teams)=> {
+            socket.emit("teams",teams);
+        });
+    });
+    socket.on('getTeamInfo',(teamId) => {
+        sql.query(sql.selectTeamInfo(teamId),(teamInfo)=> {
+            socket.emit("teamInfo",teamInfo);
+        });
+    });
+//
 
 //     socket.on('addNewProduct',data => {
 //         console.log('Новый продукт:',data);

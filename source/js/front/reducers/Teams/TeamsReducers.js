@@ -1,9 +1,17 @@
-import {successMatches} from 'js/front/actions/MatchesListActions/MatchesListActions';
+import {successTeams,failureTeams,requestTeams} from 'js/front/actions/TeamsActions/TeamsActions';
 import {handleAction, handleActions} from 'redux-actions';
 
 export const Teams = handleAction(
-    successMatches,
+    successTeams,
     (state, action) => action.payload,
     []
 );
 
+export const isGettingTeams=handleActions(
+    {
+        [requestTeams]:()=>true,
+        [failureTeams]:()=>false,
+        [successTeams]:()=>false,
+    },
+    false
+);

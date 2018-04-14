@@ -7,10 +7,11 @@ export const MatchesList = handleAction(
     []
 );
 
-export const isGetting=handleActions(
+export const isGettingMatches=handleActions(
     {
         [requestMatches]:()=>true,
         [successMatches]:()=>false,
+        [failureMatches]:()=>false,
     },
     false
 );
