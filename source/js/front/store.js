@@ -1,6 +1,3 @@
-/**
- * Created by mike on 24.03.18.
- */
 import rootReducer from 'js/front/reducers/index';
 import MatchesListMiddleware from 'js/front/middlewares/MatchesListMiddleware';
 import TeamsMiddleware from 'js/front/middlewares/TeamsMiddleware';
@@ -18,11 +15,9 @@ export default initialState => {
                 TeamsMiddleware,
                 TeamInfoMiddleware,
                 SetIsFavoriteMiddleware
-            ),
-            window.devToolsExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+            )
         )
     );
-
 
     return store;
 };

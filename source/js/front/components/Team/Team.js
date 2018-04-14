@@ -7,22 +7,23 @@ import {Switch,Route,Link,Redirect,withRouter} from 'react-router-dom';
 export class Team extends Component {
     constructor(props){
         super(props);
+        const {Teams} = this.props,
+            {id} = this.props.match.params;
         this.state = {
             popUpShow:false,
-            popUp:'Команда добавлена в любимые',
+            btnVal:!Teams.filter(el => (el.id===Number(id)))[0].isFavorite?'Добавить к любимым':'Удалить из любимых',
         }
     }
-    handleClick = () =>{
+    handleClick = () => {
         const {id} = this.props.match.params,
             {setIsFavorite,Teams} = this.props,
-            isFavorite = Teams.filter(el=>(el.id===Number(id)))[0].isFavorite;
+            isFavorite = Teams.filter(el => (el.id===Number(id)))[0].isFavorite;
         setIsFavorite({
             id,
             isFavorite
         });
         this.setState({
-            popUpShow:true,
-            popUp:Number(isFavorite)?'Команда удалена из любимых':'Команда добавлена в любимые',
+            btnVal:Number(isFavorite)?'Добавить к любимым':'Удалить из любимых',
         });
     };
     componentDidMount(){
@@ -33,12 +34,14 @@ export class Team extends Component {
     render() {
         const {isGettingTeamInfo,TeamInfo,Teams} = this.props,
               {teamScore,closeInScore,maxScore,matchesInfo} = TeamInfo,
-              {popUpShow,popUp} = this.state,
-              teamsTitle = new Map(Teams.map(el=>[el.id,el.title]));
+              {btnVal} = this.state,
+              teamsTitle = new Map(Teams.map(el => [el.id,el.title])),
+              {id} = this.props.match.params;
         return (
             <div>
                 {isGettingTeamInfo ? <PopUp>Подождите идет загрузка...</PopUp> :
                     <div>
+                        <h2>{teamsTitle.get(Number(id))}</h2>
                         <div><strong>Информацию об играх за текущий период</strong>
                             <ul>
                                 {matchesInfo?matchesInfo.map(match => (
@@ -61,11 +64,13 @@ export class Team extends Component {
                                 )):null}
                             </ul>
                         </div>
-                        <div><strong>Команду с максимальным отрывом по очкам от данной:</strong>Команда {teamsTitle.get(maxScore.teamId)}</div> с результатом {maxScore.score}
+                        <div><strong>Команду с максимальным отрывом по очкам от данной:</strong>
+                            <div>
+                                Команда {teamsTitle.get(maxScore.teamId)}</div> с результатом {maxScore.score}
+                            </div>
                         <div>
-                            <button onClick={this.handleClick}>Сделать команду любимой</button>
+                            <button onClick={this.handleClick}>{btnVal}</button>
                         </div>
-                        {popUpShow?<PopUp>{popUp}</PopUp>:''}
                     </div>
                 }
             </div>
@@ -73,7 +78,7 @@ export class Team extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return{
         TeamInfo: state.TeamInfo,
         isGettingTeamInfo: state.isGettingTeamInfo,
@@ -81,12 +86,12 @@ const mapStateToProps = (state) =>{
     }
 };
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        requestTeamInfo: (teamId) =>{
+        requestTeamInfo: (teamId) => {
             dispatch(requestTeamInfo(teamId));
         },
-        setIsFavorite: (id) =>{
+        setIsFavorite: (id) => {
             dispatch(setIsFavorite(id));
         }
     }

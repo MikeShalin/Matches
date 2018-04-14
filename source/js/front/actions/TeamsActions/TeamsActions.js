@@ -1,26 +1,26 @@
 import {createActions} from 'redux-actions';
 
 export const {
-    requestTeams:requestTeams,
-    failureTeams:failureTeams,
-    successTeams:successTeams,
-    requestTeamInfo:requestTeamInfo,
-    failureTeamInfo:failureTeamInfo,
-    successTeamInfo:successTeamInfo,
-    setIsFavorite:setIsFavorite
+    requestTeams : requestTeams,
+    failureTeams : failureTeams,
+    successTeams : successTeams,
+    requestTeamInfo : requestTeamInfo,
+    failureTeamInfo : failureTeamInfo,
+    successTeamInfo : successTeamInfo,
+    setIsFavorite : setIsFavorite
 } = createActions({
 
-    REQUEST_TEAMS: undefined,
+    REQUEST_TEAMS : undefined,
 
-    FAILURE_TEAMS: undefined,
+    FAILURE_TEAMS : undefined,
 
-    SUCCESS_TEAMS: teams => teams,
+    SUCCESS_TEAMS : teams => teams,
 
-    REQUEST_TEAM_INFO: teamId => teamId,
+    REQUEST_TEAM_INFO : teamId => teamId,
 
-    FAILURE_TEAM_INFO: undefined,
+    FAILURE_TEAM_INFO : undefined,
 
-    SUCCESS_TEAM_INFO: info => info,
+    SUCCESS_TEAM_INFO : info => info,
 
-    SET_IS_FAVORITE: id => id
+    SET_IS_FAVORITE : id => id
 });

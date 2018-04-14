@@ -1,19 +1,15 @@
-/**
- * Created by mike on 24.03.18.
- */
-
 import {createActions} from 'redux-actions';
 
 export const {
-    requestMatches:requestMatches,
-    failureMatches:failureMatches,
-    successMatches:successMatches,
+    requestMatches : requestMatches,
+    failureMatches : failureMatches,
+    successMatches : successMatches,
 } = createActions({
 
-    REQUEST_MATCHES: undefined,
+    REQUEST_MATCHES : undefined,
 
-    FAILURE_MATCHES: undefined,
+    FAILURE_MATCHES : undefined,
 
-    SUCCESS_MATCHES: matches => matches,
+    SUCCESS_MATCHES : matches => matches,
 
 });

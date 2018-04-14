@@ -9,9 +9,9 @@ export const MatchesList = handleAction(
 
 export const isGettingMatches=handleActions(
     {
-        [requestMatches]:()=>true,
-        [successMatches]:()=>false,
-        [failureMatches]:()=>false,
+        [requestMatches]:() => true,
+        [successMatches]:() => false,
+        [failureMatches]:() => false,
     },
     false
 );

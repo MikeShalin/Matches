@@ -9,9 +9,9 @@ export const Teams = handleAction(
 
 export const isGettingTeams=handleActions(
     {
-        [requestTeams]:()=>true,
-        [failureTeams]:()=>false,
-        [successTeams]:()=>false,
+        [requestTeams]:() => true,
+        [failureTeams]:() => false,
+        [successTeams]:() => false,
     },
     false
 );

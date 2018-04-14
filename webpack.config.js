@@ -1,11 +1,11 @@
-const path = require("path");
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: ["./source/js/front/index.js","./source/scss/base.scss"],
+    entry: ['./source/js/front/index.js','./source/scss/base.scss'],
     output: {
-        path: __dirname + "/public_html",
-        filename: "bundle.js"
+        path: __dirname + '/public_html',
+        filename: 'bundle.js'
     },
     module: {
         rules: [

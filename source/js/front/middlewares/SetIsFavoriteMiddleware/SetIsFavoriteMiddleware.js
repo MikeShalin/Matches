@@ -1,6 +1,6 @@
 import {setIsFavorite} from 'js/front/actions/TeamsActions/TeamsActions';
 import {successTeams} from 'js/front/actions/TeamsActions/TeamsActions';
-import socket from "js/connect/socket-connect/socket-connect";
+import socket from 'js/connect/socket-connect/socket-connect';
 
 const SetIsFavoriteMiddleware = store => next => action => {
     if (

@@ -7,9 +7,9 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/" exact component={MatchesList} />
-                <Route path="/team/:id" component={Team}/>
-                <Redirect from="*" to="/"/>
+                <Route path='/' exact component={MatchesList} />
+                <Route path='/team/:id' component={Team}/>
+                <Redirect from='*' to='/'/>
             </Switch>
 
         )

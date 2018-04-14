@@ -14,17 +14,17 @@ export class MatchesList extends Component {
     }
     render() {
         const {MatchesList,isGettingMatches,Teams} = this.props,
-            teamsTitle=new Map(Teams.map(el=>[el.id,el.title])),
-            teamsIsFavorite=new Map(Teams.map(el=>[el.id,el.isFavorite]));
+            teamsTitle = new Map(Teams.map(el => [el.id,el.title])),
+            teamsIsFavorite = new Map(Teams.map(el => [el.id,el.isFavorite]));
         //
         return (
             <div>
                 {isGettingMatches?<PopUp>Подождите идет загрузка...</PopUp>:<ul>
-                    {MatchesList.map(match =>(
-                        <li key={match.matchId}>
-                            <strong>Матч {match.matchId}</strong> команды: {match.teams.split(',').map(team=>(
-                            <div className={teamsIsFavorite.get(Number(team))?'checked':''}>
-                                <Link to={`/team/${team}`} component={Team}>
+                    {MatchesList.map(match => (
+                        <li key = {match.matchId}>
+                            <strong>Матч {match.matchId}</strong> команды: {match.teams.split(',').map(team => (
+                            <div className = {teamsIsFavorite.get(Number(team))?'checked':''}>
+                                <Link to = {`/team/${team}`} component = {Team}>
                                     <em>{teamsTitle.get(Number(team))}</em>
                                 </Link>
                             </div>
@@ -37,7 +37,7 @@ export class MatchesList extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     return{
         MatchesList: state.MatchesList,
         isGettingMatches: state.isGettingMatches,
@@ -46,12 +46,12 @@ const mapStateToProps = (state) =>{
     }
 };
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        requestMatches: () =>{
+        requestMatches: () => {
             dispatch(requestMatches());
         },
-        requestTeams: () =>{
+        requestTeams: () => {
             dispatch(requestTeams());
         }
     }

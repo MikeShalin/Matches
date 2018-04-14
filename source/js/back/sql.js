@@ -1,4 +1,4 @@
-const db = require("../connect/db/connect.js");
+const db = require('../connect/db/connect.js');
 
 module.exports ={
     selectProductList: (userId) => {return `SELECT title, P.ID FROM userProducts AS UP INNER JOIN product AS P WHERE UP.userID = ${userId} AND UP.productID = P.ID`},
